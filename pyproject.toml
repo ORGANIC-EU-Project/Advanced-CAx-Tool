@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "organic-infill-generator"
+version = "0.1.0"
+description = "Basic module of the ORGANIC CAx tool: slicing, walls and continuous infill toolpaths for extrusion additive manufacturing."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "numpy>=1.24",
+    "shapely>=2.0",
+    "trimesh>=4.0",
+    # trimesh loads it on demand to orient the normals of the exported mesh.
+    "networkx>=3.0",
+    # Triangulation backend trimesh needs to extrude a filleted path watertight.
+    "mapbox_earcut>=2.0",
+    "matplotlib>=3.7",
+]
+
+[project.optional-dependencies]
+# STEP import and export. Everything else works without it.
+cad = ["cadquery"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
